@@ -1,0 +1,247 @@
+/*==============================================================*/
+/* Table: CAMA                                                  */
+/*==============================================================*/
+create table CAMA (
+   ID_CAMA              int                  not null,
+   ID_DEPARTAMENTO      int                  null,
+   NUMERO_CAMA          int                  null,
+   PISO                 char(30)             null,
+   ESTATUS              char(30)             null,
+   constraint PK_CAMA primary key nonclustered (ID_CAMA)
+)
+go
+
+/*==============================================================*/
+/* Table: CITA                                                  */
+/*==============================================================*/
+create table CITA (
+   ID_CITA              int                  not null,
+   ID_PACIENTE          int                  null,
+   ID_MEDICO            int                  null,
+   ID_CONSULTA          int                  null,
+   FECHA                datetime             null,
+   HORA                 char(50)             null,
+   MOTIVO               char(100)            null,
+   ESTATUS              char(30)             null,
+   constraint PK_CITA primary key nonclustered (ID_CITA)
+)
+go
+
+/*==============================================================*/
+/* Table: COMPRA                                                */
+/*==============================================================*/
+create table COMPRA (
+   ID_COMPRA            int                  not null,
+   CANTIDAD             int                  null,
+   FECHA_COMPRA         datetime             null,
+   PRECIO_UNITARIO      char(30)             null,
+   MONTO_TOTAL          int                  null,
+   constraint PK_COMPRA primary key nonclustered (ID_COMPRA)
+)
+go
+
+/*==============================================================*/
+/* Table: CONSULTA                                              */
+/*==============================================================*/
+create table CONSULTA (
+   ID_CONSULTA          int                  not null,
+   ID_EXAMEN            int                  null,
+   ID_PACIENTE          int                  null,
+   DIAGNOSTICO          char(100)            null,
+   TRATAMIENTO          char(100)            null,
+   MEDICAMENTOS         char(100)            null,
+   OBSERVACIONES        char(100)            null,
+   constraint PK_CONSULTA primary key nonclustered (ID_CONSULTA)
+)
+go
+
+/*==============================================================*/
+/* Table: DEPARTAMENTO                                          */
+/*==============================================================*/
+create table DEPARTAMENTO (
+   ID_DEPARTAMENTO      int                  not null,
+   ID_HOSPITAL          int                  null,
+   NOMBRE               char(30)             null,
+   JEFE_DEPARTAMENTO    char(50)             null,
+   constraint PK_DEPARTAMENTO primary key nonclustered (ID_DEPARTAMENTO)
+)
+go
+
+/*==============================================================*/
+/* Table: EMPLEADO                                              */
+/*==============================================================*/
+create table EMPLEADO (
+   ID_EMPLEADO          int                  not null,
+   ID_HOSPITAL          int                  null,
+   NOMBRE               char(30)             null,
+   APELLIDO             char(30)             null,
+   FECHA_NACIMIENTO     datetime             null,
+   SEXO                 char(20)             null,
+   DIRECCION            char(40)             null,
+   TELEFONO             int                  null,
+   CORREO_ELECTRONICO   char(70)             null,
+   FECHA_CONTRATACION   datetime             null,
+   CARGO                char(40)             null,
+   constraint PK_EMPLEADO primary key nonclustered (ID_EMPLEADO)
+)
+go
+
+/*==============================================================*/
+/* Table: ESPECIALIDAD                                          */
+/*==============================================================*/
+create table ESPECIALIDAD (
+   ID_ESPECIALIDAD      int                  not null,
+   ID_MEDICO            int                  null,
+   NOMBRE               char(30)             null,
+   DESCRIPCION          char(100)            null,
+   constraint PK_ESPECIALIDAD primary key nonclustered (ID_ESPECIALIDAD)
+)
+go
+
+/*==============================================================*/
+/* Table: EXAMEN                                                */
+/*==============================================================*/
+create table EXAMEN (
+   ID_EXAMEN            int                  not null,
+   TIPO_EXAMEN          char(100)            null,
+   RESULTADO            char(100)            null,
+   FECHA_REALIZACION    datetime             null,
+   constraint PK_EXAMEN primary key nonclustered (ID_EXAMEN)
+)
+go
+
+/*==============================================================*/
+/* Table: FACTURA                                               */
+/*==============================================================*/
+create table FACTURA (
+   ID_FACTURA           int                  not null,
+   ID_PACIENTE          int                  null,
+   FECHA_FACTURA        datetime             null,
+   MONTO_TOTAL          int                  null,
+   FORMA_PAGO           char(50)             null,
+   NOTAS                int                  null,
+   constraint PK_FACTURA primary key nonclustered (ID_FACTURA)
+)
+go
+
+/*==============================================================*/
+/* Table: HOSPITAL                                              */
+/*==============================================================*/
+create table HOSPITAL (
+   ID_HOSPITAL          int                  not null,
+   NOMBRE               char(50)             null,
+   DIRECCION            char(100)            null,
+   TELEFONO             int                  null,
+   CORREO_ELECTRONICO   char(100)            null,
+   PAGINA_WEB           char(100)            null,
+   constraint PK_HOSPITAL primary key nonclustered (ID_HOSPITAL)
+)
+go
+
+/*==============================================================*/
+/* Table: INGRESO                                               */
+/*==============================================================*/
+create table INGRESO (
+   ID_INGRESO           int                  not null,
+   FECHA_INGRESO        datetime             null,
+   FECHA_EGRESO         datetime             null,
+   MOTIVO_INGRESO       char(100)            null,
+   constraint PK_INGRESO primary key nonclustered (ID_INGRESO)
+)
+go
+
+/*==============================================================*/
+/* Table: INVENTARIO_MEDICAMENTO                                */
+/*==============================================================*/
+create table INVENTARIO_MEDICAMENTO (
+   ID_INVENTARIO        int                  not null,
+   CANTIDAD_STOCK       int                  null,
+   FECHA_VENCIMIENTO    char(100)            null,
+   constraint PK_INVENTARIO_MEDICAMENTO primary key nonclustered (ID_INVENTARIO)
+)
+go
+
+/*==============================================================*/
+/* Table: MEDICAMENTO                                           */
+/*==============================================================*/
+create table MEDICAMENTO (
+   ID_MEDICAMENTO       int                  not null,
+   ID_INVENTARIO        int                  null,
+   ID_COMPRA            int                  null,
+   ID_PROVEEDOR         int                  null,
+   NOMBRE               char(30)             null,
+   LABORATORIO          char(30)             null,
+   COMPOSICION          char(30)             null,
+   INDICACIONES         char(30)             null,
+   CONTRAINDICACIONES   char(100)            null,
+   PRECIO               int                  null,
+   constraint PK_MEDICAMENTO primary key nonclustered (ID_MEDICAMENTO)
+)
+go
+
+/*==============================================================*/
+/* Table: MEDICO                                                */
+/*==============================================================*/
+create table MEDICO (
+   ID_MEDICO            int                  not null,
+   NOMBRE               char(30)             null,
+   APELLIDO             char(30)             null,
+   NUMERO_LICENCIA      char(50)             null,
+   FECHA_NACIMIENTO     datetime             null,
+   SEXO                 char(30)             null,
+   DIRECCION            char(100)            null,
+   TELEFONO             int                  null,
+   CORREO_ELECTRONICO   char(100)            null,
+   FECHA_REGISTRO       datetime             null,
+   constraint PK_MEDICO primary key nonclustered (ID_MEDICO)
+)
+go
+
+/*==============================================================*/
+/* Table: PACIENTE                                              */
+/*==============================================================*/
+create table PACIENTE (
+   ID_PACIENTE          int                  not null,
+   ID_INGRESO           int                  null,
+   ID_SEGURO            int                  null,
+   NOMBRE               char(50)             null,
+   APELLIDO             char(50)             null,
+   FECHA_NACIMIENTO     datetime             null,
+   SEXO                 char(15)             null,
+   DIRECCION            char(100)            null,
+   TELEFONO             int                  null,
+   CORREO_ELECTRONICO   char(150)            null,
+   TIPO_SANGRE          char(20)             null,
+   ALERGIAS             char(50)             null,
+   ENFERMEDADES_CRONICAS char(100)            null,
+   FECHA_REGISTRO       datetime             null,
+   constraint PK_PACIENTE primary key nonclustered (ID_PACIENTE)
+)
+go
+
+/*==============================================================*/
+/* Table: PROVEEDOR                                             */
+/*==============================================================*/
+create table PROVEEDOR (
+   ID_PROVEEDOR         int                  not null,
+   NOMBRE               char(50)             null,
+   DIRECCION            char(100)            null,
+   TELEFONO             int                  null,
+   CORREO_ELECTRONICO   char(100)            null,
+   constraint PK_PROVEEDOR primary key nonclustered (ID_PROVEEDOR)
+)
+go
+
+/*==============================================================*/
+/* Table: SEGURO                                                */
+/*==============================================================*/
+create table SEGURO (
+   ID_SEGURO            int                  not null,
+   NOMBRE               char(30)             null,
+   NUMERO_POLIZA        int                  null,
+   TITULAR              char(30)             null,
+   COBERTURA            char(30)             null,
+   constraint PK_SEGURO primary key nonclustered (ID_SEGURO)
+)
+go
+

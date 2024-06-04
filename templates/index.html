@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+        }
+        .btn-custom {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: #00bfff;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #009acd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Administración de Usuarios y Roles</h1>
+        <ul>
+            <li><a href="/crear_usuario" class="btn btn-custom">Crear Usuario</a></li>
+            <li><a href="/modificar_usuario" class="btn btn-custom">Modificar Usuario</a></li>
+            <li><a href="/eliminar_usuario" class="btn btn-custom">Eliminar Usuario</a></li>
+            <li><a href="/listar_usuarios" class="btn btn-custom">Listar Usuarios</a></li>
+            <li><a href="/crear_rol" class="btn btn-custom">Crear Rol</a></li>
+            <li><a href="/asignar_rol" class="btn btn-custom">Asignar Rol</a></li>
+            <li><a href="/listar_roles" class="btn btn-custom">Listar Roles</a></li>
+            <li><a href="/listar_entidades" class="btn btn-custom">Listar Entidades</a></li>
+            <li><a href="/listar_atributos" class="btn btn-custom">Listar Atributos</a></li>
+            <li><a href="/respaldar_bd" class="btn btn-custom">Respaldo</a></li>
+            <li><a href="/restaurar_bd" class="btn btn-custom">Restaurar</a></li>
+            <li><a href="/crear_tabla" class="btn btn-custom">Agregar Entidades con Atributos</a></li>
+            <li><a href="/generar_pdf" class="btn btn-custom">Generar PDF</a></li>
+            <li><a href="/generar_procedimientos" class="btn btn-custom">Generar Procedimientos Almacenados</a></li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

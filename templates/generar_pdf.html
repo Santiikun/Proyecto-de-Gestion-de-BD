@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar PDF</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seleccionar Tabla y Atributos para Generar PDF</h1>
+
+        {% if not atributos %}
+            <form method="POST">
+                <div class="form-group">
+                    <label for="tabla_seleccionada">Selecciona una tabla:</label>
+                    <select name="tabla_seleccionada" class="form-control" onchange="this.form.submit()">
+                        <option>Selecciona una tabla</option>
+                        {% for table in tablas %}
+                            <option value="{{ table[0] }}">{{ table[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        {% endif %}
+
+        {% if atributos %}
+            <form method="POST">
+                <input type="hidden" name="tabla_seleccionada" value="{{ tabla_actual }}">
+                <div class="form-group">
+                    <label>Selecciona los atributos:</label>
+                    {% for attr in atributos %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="atributos_seleccionados" value="{{ attr[0] }}" id="attr_{{ attr[0] }}">
+                            <label class="form-check-label" for="attr_{{ attr[0] }}">
+                                {{ attr[0] }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Generar PDF</button>
+            </form>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="btn btn-link mt-3">Regresar al inicio</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
