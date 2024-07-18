@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = '123456789'
 
 # Configuración de la conexión a la base de datos
-conn = pyodbc.connect(r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\CASTIME;DATABASE=G_Hospital;UID=sa;PWD=123456')
+conn = pyodbc.connect(r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\SANTI;DATABASE=G_Hospital;UID=sa;PWD=123456')
 
 @app.route('/')
 def index():
@@ -256,7 +256,7 @@ def respaldar_bd():
         print(f"Intentando guardar el respaldo en: {ruta_completa}")  # Diagnóstico
         cmd = [
             "sqlcmd",
-            "-S", r".\CASTIME",
+            "-S", r".\SANTI",
             "-U", "sa",
             "-P", "123456",
             "-Q", f"BACKUP DATABASE [{nombre_bd}] TO DISK = '{ruta_completa}' WITH NOFORMAT, NOINIT;"
@@ -287,10 +287,10 @@ def restaurar_bd():
             # Modificar el comando RESTORE DATABASE para especificar nuevas ubicaciones
             cmd = [
                 "sqlcmd",
-                "-S", r".\CASTIME",
+                "-S", r".\SANTI",
                 "-U", "sa",
                 "-P", "123456",
-                "-Q", f"RESTORE DATABASE [{nombre_sugerido_bd}] FROM DISK = '{ruta_archivo_bak}' WITH REPLACE, MOVE 'G_Hospital' TO 'C:\\Program Files\\Microsoft SQL Server\\MSSQL16.CASTIME\\MSSQL\\DATA\\{nombre_sugerido_bd}.mdf', MOVE 'G_Hospital_log' TO 'C:\\Program Files\\Microsoft SQL Server\\MSSQL16.CASTIME\\MSSQL\\DATA\\{nombre_sugerido_bd}_log.ldf';"
+                "-Q", f"RESTORE DATABASE [{nombre_sugerido_bd}] FROM DISK = '{ruta_archivo_bak}' WITH REPLACE, MOVE 'G_Hospital' TO 'C:\\Program Files\\Microsoft SQL Server\\MSSQL16.SANTI\\MSSQL\\DATA\\{nombre_sugerido_bd}.mdf', MOVE 'G_Hospital_log' TO 'C:\\Program Files\\Microsoft SQL Server\\MSSQL16.SANTI\\MSSQL\\DATA\\{nombre_sugerido_bd}_log.ldf';"
             ]
             try:
                 result = subprocess.run(cmd, check=True, text=True, capture_output=True)
@@ -325,7 +325,7 @@ def crear_tabla():
         columnas_sql = ', '.join(columnas)
         sql_crear_tabla = f"CREATE TABLE {nombre_tabla} ({columnas_sql})"
 
-        conn = pyodbc.connect(r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\CASTIME;DATABASE=G_Hospital;UID=sa;PWD=123456')
+        conn = pyodbc.connect(r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\SANTI;DATABASE=G_Hospital;UID=sa;PWD=123456')
         if conn:
             try:
                 cursor = conn.cursor()
@@ -422,7 +422,7 @@ def generar_pdf():
     cursor.close()  # Cerrar cursor después de utilizarlo
     return render_template('generar_pdf.html', tablas=tablas, atributos=None)
 
-conn_str = r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\CASTIME;DATABASE=G_Hospital;UID=sa;PWD=123456'
+conn_str = r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=.\SANTI;DATABASE=G_Hospital;UID=sa;PWD=123456'
 
 @app.route('/generar_procedimientos', methods=['GET', 'POST'])
 def generar_procedimientos():
